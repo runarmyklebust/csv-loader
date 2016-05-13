@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.io.ByteSource;
@@ -11,7 +12,7 @@ import com.google.common.io.ByteStreams;
 
 public class CSVDataLoaderTest
 {
-
+    @Ignore
     @Test
     public void cvs_loader_test_1()
         throws Exception
@@ -20,7 +21,7 @@ public class CSVDataLoaderTest
 
         final ByteSource byteSource = getAsByteSource( "world_cities.csv" );
 
-        new CSVDataLoader().load( GeoDataLoaderParams.create().
+        new CSVDataLoader().load( LoaderParams.create().
             format( CSVFormat.from( "city,city_ascii,lat,lng,pop,country,iso2,iso3,province" ) ).
             hasHeaderRow( true ).
             source( byteSource ).
@@ -30,6 +31,7 @@ public class CSVDataLoaderTest
         System.out.println( "Time used: " + ( System.currentTimeMillis() - start ) );
     }
 
+    @Ignore
     @Test
     public void cvs_loader_test_2()
         throws Exception
@@ -39,7 +41,7 @@ public class CSVDataLoaderTest
         final ByteSource byteSource = getAsByteSource( "cities_with_populations.txt" );
 
         final TestEntryHandler handler = new TestEntryHandler();
-        new CSVDataLoader().load( GeoDataLoaderParams.create().
+        new CSVDataLoader().load( LoaderParams.create().
             format( CSVFormat.from( "Country,City,AccentCity,Region,Population,Latitude,Longitude" ) ).
             hasHeaderRow( false ).
             source( byteSource ).
@@ -50,6 +52,27 @@ public class CSVDataLoaderTest
     }
 
 
+    @Ignore
+    @Test
+    public void cvs_loader_test_3()
+        throws Exception
+    {
+        final long start = System.currentTimeMillis();
+
+        final ByteSource byteSource = getAsByteSource( "addresses.csv" );
+
+        final TestEntryHandler handler = new TestEntryHandler();
+        new CSVDataLoader().load( LoaderParams.create().
+            format( CSVFormat.from(
+                "LOKASJONS_ID,GATENAVN,HUSNUMMER,HUSBOKSTAV,OPPGANG,POSTBOKSNUMMER,POSTBOKSANLEGGSNAVN,STED,POSTNUMMER,POSTSTED,KOMMUNE,KOMMUNENR,FYLKE,TYPE,KOORDINATSYSTEM,LATITUDE,LONGITUDE,IKKE_I_OMDELING,HENTESTED,HENTESTEDSNUMMER,DISTRIBUSJONSENHET,GATEKODE,OFFISIELT" ) ).
+            hasHeaderRow( true ).
+            source( byteSource ).
+            handler( handler ).
+            build() );
+
+        System.out.println( "Time used: " + ( System.currentTimeMillis() - start ) + " on " + handler.total + " entries" );
+    }
+
     private class TestEntryHandler
         implements EntryHandler
     {
@@ -58,7 +81,16 @@ public class CSVDataLoaderTest
         @Override
         public void handle( final Map<String, String> values )
         {
+
+/*
+            for ( final String value : values.keySet() )
+            {
+                System.out.println( "Value: " + value + " - " + values.get( value ) );
+            }
+*/
             total++;
+
+            //          System.out.println( "-------------------" );
         }
     }
 

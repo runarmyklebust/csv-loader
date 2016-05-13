@@ -2,7 +2,7 @@ package com.enonic.xp.loader;
 
 import com.google.common.io.ByteSource;
 
-public class GeoDataLoaderParams
+public class LoaderParams
 {
     private final ByteSource source;
 
@@ -14,7 +14,7 @@ public class GeoDataLoaderParams
 
     private final EntryHandler handler;
 
-    private GeoDataLoaderParams( final Builder builder )
+    private LoaderParams( final Builder builder )
     {
         source = builder.source;
         format = builder.format;
@@ -100,9 +100,9 @@ public class GeoDataLoaderParams
             return this;
         }
 
-        public GeoDataLoaderParams build()
+        public LoaderParams build()
         {
-            return new GeoDataLoaderParams( this );
+            return new LoaderParams( this );
         }
     }
 }

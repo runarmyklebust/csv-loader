@@ -13,7 +13,7 @@ public class CSVDataLoader
     extends AbstractDataLoader
 {
     @Override
-    public void load( final GeoDataLoaderParams params )
+    public void load( final LoaderParams params )
     {
         final ByteSource source = params.getSource();
 
@@ -21,7 +21,7 @@ public class CSVDataLoader
 
         try (InputStream in = source.openStream();
              InputStreamReader isr = new InputStreamReader( in, Charset.forName( "UTF-8" ) );
-             BufferedReader br = new BufferedReader( isr );
+             BufferedReader br = new BufferedReader( isr )
         )
         {
             String line;
@@ -43,7 +43,7 @@ public class CSVDataLoader
         }
     }
 
-    private void processLine( final String line, final GeoDataLoaderParams params )
+    private void processLine( final String line, final LoaderParams params )
     {
         final Map<String, String> valueMap = params.getFormat().parse( line, params.isFailOnErrors() );
         params.getHandler().handle( valueMap );

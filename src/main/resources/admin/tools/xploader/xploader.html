@@ -1,0 +1,36 @@
+<html>
+<head>
+    <title>xpLoader</title>
+    <link href="{{cssUrl}}" type="text/css"/>
+    <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+    <script>
+        var SERVICE_URL = '{{serviceUrl}}';
+    </script>
+    <script src="{{jsUrl}}"></script>
+</head>
+<body>
+<h1>xpLoader</h1>
+
+<div id="container"></div>
+
+<div id="loader">
+    <form action="{{serviceUrl}}" method="post" enctype="multipart/form-data">
+        <div class="upload-file">
+            <div>
+                <label>Select a file</label><br>
+                <input name="file" type="file" class="file-name">
+            </div>
+        </div>
+        <div class="text-input">
+            <label>Format</label><br>
+            <input type="text" name="format" placeholder="A comma separated format of fields that descriped ">
+        </div>
+        <div class="button-toolbar">
+            <button type="submit" name="upload" class="upload-button">Upload</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
