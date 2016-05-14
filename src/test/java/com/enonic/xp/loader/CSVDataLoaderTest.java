@@ -10,6 +10,8 @@ import org.junit.Test;
 import com.google.common.io.ByteSource;
 import com.google.common.io.ByteStreams;
 
+import com.enonic.xp.loader.format.FormatParser;
+
 public class CSVDataLoaderTest
 {
     @Ignore
@@ -22,7 +24,7 @@ public class CSVDataLoaderTest
         final ByteSource byteSource = getAsByteSource( "world_cities.csv" );
 
         new CSVDataLoader().load( LoaderParams.create().
-            format( CSVFormat.from( "city,city_ascii,lat,lng,pop,country,iso2,iso3,province" ) ).
+            lineParser( new CSVLineParser( FormatParser.parse( "city,city_ascii,lat,lng,pop,country,iso2,iso3,province", "test.csv" ) ) ).
             hasHeaderRow( true ).
             source( byteSource ).
             handler( new TestEntryHandler() ).
@@ -42,7 +44,8 @@ public class CSVDataLoaderTest
 
         final TestEntryHandler handler = new TestEntryHandler();
         new CSVDataLoader().load( LoaderParams.create().
-            format( CSVFormat.from( "Country,City,AccentCity,Region,Population,Latitude,Longitude" ) ).
+            lineParser(
+                new CSVLineParser( FormatParser.parse( "Country,City,AccentCity,Region,Population,Latitude,Longitude", "test.csv" ) ) ).
             hasHeaderRow( false ).
             source( byteSource ).
             handler( handler ).
@@ -63,8 +66,9 @@ public class CSVDataLoaderTest
 
         final TestEntryHandler handler = new TestEntryHandler();
         new CSVDataLoader().load( LoaderParams.create().
-            format( CSVFormat.from(
-                "LOKASJONS_ID,GATENAVN,HUSNUMMER,HUSBOKSTAV,OPPGANG,POSTBOKSNUMMER,POSTBOKSANLEGGSNAVN,STED,POSTNUMMER,POSTSTED,KOMMUNE,KOMMUNENR,FYLKE,TYPE,KOORDINATSYSTEM,LATITUDE,LONGITUDE,IKKE_I_OMDELING,HENTESTED,HENTESTEDSNUMMER,DISTRIBUSJONSENHET,GATEKODE,OFFISIELT" ) ).
+            lineParser( new CSVLineParser( FormatParser.parse(
+                "LOKASJONS_ID,GATENAVN,HUSNUMMER,HUSBOKSTAV,OPPGANG,POSTBOKSNUMMER,POSTBOKSANLEGGSNAVN,STED,POSTNUMMER,POSTSTED,KOMMUNE,KOMMUNENR,FYLKE,TYPE,KOORDINATSYSTEM,LATITUDE,LONGITUDE,IKKE_I_OMDELING,HENTESTED,HENTESTEDSNUMMER,DISTRIBUSJONSENHET,GATEKODE,OFFISIELT",
+                "test.csv" ) ) ).
             hasHeaderRow( true ).
             source( byteSource ).
             handler( handler ).

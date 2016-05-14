@@ -6,7 +6,7 @@ public class LoaderParams
 {
     private final ByteSource source;
 
-    private final Format format;
+    private final LineParser lineParser;
 
     private final boolean hasHeaderRow;
 
@@ -17,7 +17,7 @@ public class LoaderParams
     private LoaderParams( final Builder builder )
     {
         source = builder.source;
-        format = builder.format;
+        lineParser = builder.lineParser;
         hasHeaderRow = builder.hasHeaderRow;
         failOnErrors = builder.failOnErrors;
         handler = builder.handler;
@@ -43,9 +43,9 @@ public class LoaderParams
         return source;
     }
 
-    public Format getFormat()
+    public LineParser getLineParser()
     {
-        return format;
+        return lineParser;
     }
 
     public static Builder create()
@@ -58,7 +58,7 @@ public class LoaderParams
     {
         private ByteSource source;
 
-        private Format format;
+        private LineParser lineParser;
 
         private boolean hasHeaderRow;
 
@@ -76,9 +76,9 @@ public class LoaderParams
             return this;
         }
 
-        public Builder format( final Format val )
+        public Builder lineParser( final LineParser val )
         {
-            format = val;
+            lineParser = val;
             return this;
         }
 

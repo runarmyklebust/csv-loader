@@ -5,3 +5,7 @@ exports.load = function (source, format, hasHeader) {
     return __.toNativeObject(result);
 };
 
+exports.getFormat = function (source, fileName) {
+    var result = bean.getFormat(source, fileName);
+    return __.toNativeObject(result);
+};

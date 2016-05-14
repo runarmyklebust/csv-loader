@@ -2,7 +2,8 @@ package com.enonic.xp.loader;
 
 import java.util.Map;
 
-public interface Format
+public interface LineParser
 {
+
     Map<String, String> parse( final String value, final boolean failOnErrors );
 }

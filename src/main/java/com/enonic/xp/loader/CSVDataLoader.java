@@ -45,7 +45,7 @@ public class CSVDataLoader
 
     private void processLine( final String line, final LoaderParams params )
     {
-        final Map<String, String> valueMap = params.getFormat().parse( line, params.isFailOnErrors() );
+        final Map<String, String> valueMap = params.getLineParser().parse( line, params.isFailOnErrors() );
         params.getHandler().handle( valueMap );
 
     }

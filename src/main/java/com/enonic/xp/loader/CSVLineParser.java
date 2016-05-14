@@ -1,19 +1,24 @@
 package com.enonic.xp.loader;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
-public class CSVFormat
-    implements Format
+import com.enonic.xp.loader.format.Format;
+
+public class CSVLineParser
+    implements LineParser
 {
     private final static Pattern pattern = Pattern.compile( "\\\"([^\\\"]*)\\\"|(?<=,|^)([^,]*)(?=,|$)" );
 
-    private final List<String> format;
+    private final Format format;
+
+    public CSVLineParser( final Format format )
+    {
+        this.format = format;
+    }
 
     @Override
     public Map<String, String> parse( final String input, final boolean failOnErrors )
@@ -27,7 +32,7 @@ public class CSVFormat
         {
             try
             {
-                valueMap.put( format.get( i++ ), value );
+                valueMap.put( format.getName( i++ ), FieldUtil.clean( value ) );
             }
             catch ( Exception e )
             {
@@ -43,24 +48,5 @@ public class CSVFormat
         }
 
         return valueMap;
-    }
-
-    public CSVFormat( final List<String> format )
-    {
-        this.format = format;
-    }
-
-    public static CSVFormat from( final String format )
-    {
-        final String[] split = format.split( "," );
-
-        List<String> formatList = Lists.newLinkedList();
-
-        for ( final String element : split )
-        {
-            formatList.add( element );
-        }
-
-        return new CSVFormat( formatList );
     }
 }
