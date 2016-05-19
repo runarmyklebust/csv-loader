@@ -7,9 +7,11 @@ import java.util.Map;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.google.common.collect.Lists;
 import com.google.common.io.ByteSource;
 import com.google.common.io.ByteStreams;
 
+import com.enonic.xp.loader.format.Format;
 import com.enonic.xp.loader.format.FormatParser;
 
 public class CSVDataLoaderTest
@@ -24,7 +26,7 @@ public class CSVDataLoaderTest
         final ByteSource byteSource = getAsByteSource( "world_cities.csv" );
 
         new CSVDataLoader().load( LoaderParams.create().
-            lineParser( new CSVLineParser( FormatParser.parse( "city,city_ascii,lat,lng,pop,country,iso2,iso3,province", "test.csv" ) ) ).
+            lineParser( new CSVLineParser( new Format( Lists.newLinkedList() ) ) ).
             hasHeaderRow( true ).
             source( byteSource ).
             handler( new TestEntryHandler() ).
@@ -80,7 +82,7 @@ public class CSVDataLoaderTest
     private class TestEntryHandler
         implements EntryHandler
     {
-        long total = 0;
+        int total = 0;
 
         @Override
         public void handle( final Map<String, String> values )
@@ -95,6 +97,12 @@ public class CSVDataLoaderTest
             total++;
 
             //          System.out.println( "-------------------" );
+        }
+
+        @Override
+        public int getTotal()
+        {
+            return this.total;
         }
     }
 

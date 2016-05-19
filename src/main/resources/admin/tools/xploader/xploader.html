@@ -4,10 +4,14 @@
     <link href="{{cssUrl}}" type="text/css"/>
     <script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
 
-    <script>
-        var SERVICE_URL = '{{serviceUrl}}';
-    </script>
     <script src="{{jsUrl}}"></script>
+
+    <script>
+        var loaderServiceUrl = '{{loaderServiceUrl}}';
+        var parserServiceUrl = '{{parserServiceUrl}}';
+    </script>
+
+    <script data-th-src="${portal.assetUrl({'_path=js/jquery-2.2.3.min.js'})}" src="../../../assets/js/jquery-2.2.3.min.js"></script>
 </head>
 <body>
 <h1>xpLoader</h1>
@@ -15,11 +19,11 @@
 <div id="container"></div>
 
 <div id="loader">
-    <form action="{{serviceUrl}}" method="post" enctype="multipart/form-data">
+    <form name="fileForm" action="{{loaderServiceUrl}}?upload" method="post" enctype="multipart/form-data">
         <div class="upload-file">
             <div>
                 <label>Select a file</label><br>
-                <input name="file" type="file" class="file-name">
+                <input id="fileinput" name="file" type="file" class="file-name" onchange="fileUploaded();">
             </div>
         </div>
         <div class="text-input">
@@ -28,6 +32,8 @@
         </div>
         <div class="button-toolbar">
             <button type="submit" name="upload" class="upload-button">Upload</button>
+        </div>
+        <div id="fieldsList" class="fields-list">
         </div>
     </form>
 </div>

@@ -10,9 +10,14 @@ exports.get = function (req) {
         cssUrl: portal.assetUrl({path: "/css/main.css"})
     };
 
-    model.serviceUrl = portal.serviceUrl({
+    model.loaderServiceUrl = portal.serviceUrl({
         service: 'csv-loader-service'
     });
+
+    model.parserServiceUrl = portal.serviceUrl({
+        service: 'fileParser'
+    });
+
 
     return {
         contentType: 'text/html',

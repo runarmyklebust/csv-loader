@@ -28,7 +28,7 @@ public class FormatParser
 
     private static Format doParse( final String header, final String fileName )
     {
-        if ( fileName.endsWith( ".csv" ) )
+        if ( fileName.endsWith( ".csv" ) || fileName.endsWith( ".txt" ) )
         {
             return CsvFormatParser.parse( header );
         }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import com.enonic.xp.data.ValueTypes;
 import com.enonic.xp.loader.FieldUtil;
 
 public class CsvFormatParser
@@ -21,6 +22,8 @@ public class CsvFormatParser
                 name( fieldName ).
                 alias( fieldName ).
                 skip( false ).
+                isNodeNameElement( true ).
+                valueType( ValueTypes.STRING ).
                 build() );
         }
 

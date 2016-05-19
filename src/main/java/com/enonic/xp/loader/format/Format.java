@@ -25,4 +25,12 @@ public class Format
     {
         return fields;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Format{" +
+            "fields=" + fields +
+            '}';
+    }
 }
