@@ -1,4 +1,4 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.tool;
 
 public class FieldUtil
 {

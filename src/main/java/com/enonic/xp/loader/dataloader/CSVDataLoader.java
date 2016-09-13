@@ -1,4 +1,4 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.dataloader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,8 +12,10 @@ import com.google.common.io.ByteSource;
 public class CSVDataLoader
     extends AbstractDataLoader
 {
+    private long processed = 0;
+
     @Override
-    public void load( final LoaderParams params )
+    public void load( final DataLoaderParams params )
     {
         final ByteSource source = params.getSource();
 
@@ -35,6 +37,7 @@ public class CSVDataLoader
                 }
 
                 processLine( line, params );
+                processed++;
             }
         }
         catch ( IOException e )
@@ -43,10 +46,14 @@ public class CSVDataLoader
         }
     }
 
-    private void processLine( final String line, final LoaderParams params )
+    public long processed()
+    {
+        return processed;
+    }
+
+    private void processLine( final String line, final DataLoaderParams params )
     {
         final Map<String, String> valueMap = params.getLineParser().parse( line, params.isFailOnErrors() );
         params.getHandler().handle( valueMap );
-
     }
 }

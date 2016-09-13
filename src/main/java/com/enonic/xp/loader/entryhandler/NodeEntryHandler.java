@@ -1,9 +1,11 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.entryhandler;
 
 import java.util.Map;
 
 import com.enonic.xp.data.PropertyTree;
+import com.enonic.xp.loader.PropertyTreeFactory;
 import com.enonic.xp.loader.format.Format;
+import com.enonic.xp.loader.tool.NodeNameFactory;
 import com.enonic.xp.node.CreateNodeParams;
 import com.enonic.xp.node.Node;
 import com.enonic.xp.node.NodePath;
@@ -46,6 +48,12 @@ public class NodeEntryHandler
             build() );
 
         total++;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "node";
     }
 
     public int getTotal()

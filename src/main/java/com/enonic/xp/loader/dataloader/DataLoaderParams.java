@@ -1,8 +1,11 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.dataloader;
 
 import com.google.common.io.ByteSource;
 
-public class LoaderParams
+import com.enonic.xp.loader.parser.LineParser;
+import com.enonic.xp.loader.entryhandler.EntryHandler;
+
+public class DataLoaderParams
 {
     private final ByteSource source;
 
@@ -14,7 +17,7 @@ public class LoaderParams
 
     private final EntryHandler handler;
 
-    private LoaderParams( final Builder builder )
+    private DataLoaderParams( final Builder builder )
     {
         source = builder.source;
         lineParser = builder.lineParser;
@@ -100,9 +103,9 @@ public class LoaderParams
             return this;
         }
 
-        public LoaderParams build()
+        public DataLoaderParams build()
         {
-            return new LoaderParams( this );
+            return new DataLoaderParams( this );
         }
     }
 }

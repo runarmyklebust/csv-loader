@@ -1,7 +1,28 @@
 $(function () {
 
+    getStatus();
+
+    setInterval(function () {
+        getStatus();
+    }, 2000);
 });
 
+function getStatus() {
+    jQuery.ajax({
+        url: statusServiceUrl,
+        cache: false,
+        success: function (result) {
+            console.log(result);
+            var html = "";
+            html += "<p>Status: " + result.status.jobStatus + "</p>";
+            html += "<p>Processed: " + result.status.processed + "</p>";
+            html += "<p>Speed: " + result.status.speed + "</p>";
+            html += "<p>RunTime: " + result.status.runTime + "</p>";
+
+            $('#status').html(html);
+        }
+    });
+}
 
 var fileUploaded = function () {
 

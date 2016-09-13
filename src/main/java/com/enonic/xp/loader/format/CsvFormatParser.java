@@ -5,7 +5,7 @@ import java.util.List;
 import com.google.common.collect.Lists;
 
 import com.enonic.xp.data.ValueTypes;
-import com.enonic.xp.loader.FieldUtil;
+import com.enonic.xp.loader.tool.FieldUtil;
 
 public class CsvFormatParser
 {

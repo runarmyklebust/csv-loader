@@ -27,25 +27,39 @@ function parseFormat() {
     return fields;
 }
 
-exports.post = function (req) {
-
-    var byteSource = portalLib.getMultipartStream("file");
-    var file = portalLib.getMultipartItem("file");
-    var format = portalLib.getMultipartText('format');
-    var header = true;
-
-    var format = parseFormat();
-
-    var result = xpLoaderLib.load(byteSource, format, header);
+function runPublish() {
+    xpLoaderLib.publish();
 
     var model = {
-        total: result.successful,
-        timeUsed: result.timeUsed
-    };
+        published: "ok"
+    }
 
     return {
         contentType: 'text/plain',
         body: model
     }
+}
+exports.post = function (req) {
 
+    var redirectUrl = "http://localhost:8080/admin/tool/com.enonic.app.csvloader/xploader";
+
+    var publishOnly = portalLib.getMultipartText("publishOnly");
+
+    if (publishOnly == 'on') {
+        return runPublish();
+    }
+
+    var byteSource = portalLib.getMultipartStream("file");
+    var file = portalLib.getMultipartItem("file");
+    var format = parseFormat();
+
+    var result = xpLoaderLib.load(byteSource, format, "content");
+
+    log.info("Result: %s", result);
+
+    log.info("Redirect: %s", redirectUrl);
+
+    return {
+        redirect: redirectUrl
+    };
 };

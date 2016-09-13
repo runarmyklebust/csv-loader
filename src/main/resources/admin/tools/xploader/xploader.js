@@ -14,6 +14,10 @@ exports.get = function (req) {
         service: 'csv-loader-service'
     });
 
+    model.statusServiceUrl = portal.serviceUrl({
+        service: 'status-service'
+    });
+
     model.parserServiceUrl = portal.serviceUrl({
         service: 'fileParser'
     });

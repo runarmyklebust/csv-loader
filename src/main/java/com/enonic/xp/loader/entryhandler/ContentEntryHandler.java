@@ -1,4 +1,4 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.entryhandler;
 
 import java.util.Map;
 
@@ -12,7 +12,9 @@ import com.enonic.xp.content.ContentService;
 import com.enonic.xp.content.CreateContentParams;
 import com.enonic.xp.content.PushContentParams;
 import com.enonic.xp.data.PropertyTree;
+import com.enonic.xp.loader.PropertyTreeFactory;
 import com.enonic.xp.loader.format.Format;
+import com.enonic.xp.loader.tool.NodeNameFactory;
 import com.enonic.xp.schema.content.ContentTypeName;
 
 public class ContentEntryHandler
@@ -44,8 +46,13 @@ public class ContentEntryHandler
                 contentData( new PropertyTree() ).
                 build() );
 
-            System.out.println( "Created root content: " + rootContent.getPath() );
+            System.out.println( "#### Created root content: " + rootContent.getPath() );
         }
+        else
+        {
+            System.out.println( "#### Content root node already created" );
+        }
+
     }
 
     @Override
@@ -86,6 +93,12 @@ public class ContentEntryHandler
     public int getTotal()
     {
         return this.total;
+    }
+
+    @Override
+    public String getName()
+    {
+        return "content";
     }
 
     public static Builder create()

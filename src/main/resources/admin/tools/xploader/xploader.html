@@ -9,6 +9,7 @@
     <script>
         var loaderServiceUrl = '{{loaderServiceUrl}}';
         var parserServiceUrl = '{{parserServiceUrl}}';
+        var statusServiceUrl = '{{statusServiceUrl}}';
     </script>
 
     <script data-th-src="${portal.assetUrl({'_path=js/jquery-2.2.3.min.js'})}" src="../../../assets/js/jquery-2.2.3.min.js"></script>
@@ -17,6 +18,10 @@
 <h1>xpLoader</h1>
 
 <div id="container"></div>
+
+<div id="status">
+
+</div>
 
 <div id="loader">
     <form name="fileForm" action="{{loaderServiceUrl}}?upload" method="post" enctype="multipart/form-data">
@@ -33,6 +38,11 @@
         <div class="button-toolbar">
             <button type="submit" name="upload" class="upload-button">Upload</button>
         </div>
+        <div>
+            <label>PublishOnly</label><br>
+            <label for="publishOnly"></label><input id="publishOnly" name="publishOnly" type="checkbox">
+        </div>
+
         <div id="fieldsList" class="fields-list">
         </div>
     </form>

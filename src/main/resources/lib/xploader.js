@@ -1,18 +1,24 @@
-exports.load = function (source, format, hasHeader) {
+var bean = __.newBean('com.enonic.xp.loader.LoaderBean');
 
-    var bean = __.newBean('com.enonic.xp.loader.CSVLoaderBean');
-    bean.source = source;
-    bean.hasHeader = hasHeader;
+exports.load = function (source, format, entryHandler) {
+
     var nativeFields = __.toScriptValue(format);
-    bean.fields = nativeFields;
-
-    var result = bean.load();
+    var result = bean.load(source, nativeFields, entryHandler);
 
     return __.toNativeObject(result);
 };
 
+exports.publish = function () {
+    bean.publish();
+};
+
+
+exports.status = function () {
+    return __.toNativeObject(bean.getStatus());
+};
+
+
 exports.getFormat = function (source, fileName) {
-    var bean = __.newBean('com.enonic.xp.loader.CSVLoaderBean');
     var result = bean.getFormat(source, fileName);
     return __.toNativeObject(result);
 };

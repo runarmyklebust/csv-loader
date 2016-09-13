@@ -1,9 +1,10 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.tool;
 
 import java.util.Map;
 
 import com.google.common.base.Strings;
 
+import com.enonic.xp.loader.LoaderException;
 import com.enonic.xp.loader.format.Field;
 import com.enonic.xp.loader.format.Format;
 

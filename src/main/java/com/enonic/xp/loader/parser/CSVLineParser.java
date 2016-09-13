@@ -1,4 +1,4 @@
-package com.enonic.xp.loader;
+package com.enonic.xp.loader.parser;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 
 import com.google.common.collect.Maps;
 
+import com.enonic.xp.loader.tool.FieldUtil;
 import com.enonic.xp.loader.format.Format;
 
 public class CSVLineParser
